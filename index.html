@@ -81,19 +81,16 @@
       width: 220px; height: 220px; border-radius: 50%;
       border: 2px solid rgba(126,207,179,0.35);
       box-shadow: 0 0 40px rgba(126,207,179,0.1);
-      overflow: hidden; cursor: pointer; position: relative;
+      overflow: hidden; position: relative;
       background: var(--bg3); display: flex; align-items: center; justify-content: center;
-      transition: border-color .3s;
     }
-    .profile-photo-ring:hover { border-color: var(--accent); }
-    .profile-photo-ring img { width: 100%; height: 100%; object-fit: cover; display: none; }
+    .profile-photo-ring img { width: 100%; height: 100%; object-fit: cover; }
     .photo-placeholder {
       display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
       color: var(--muted); font-size: 0.78rem; text-align: center; padding: 1rem;
     }
     .photo-placeholder svg { opacity: 0.4; }
     .photo-placeholder span { letter-spacing: 0.05em; line-height: 1.4; }
-    #photo-input { display: none; }
 
     .hero-text { }
     .hero-eyebrow { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.14em;
@@ -211,14 +208,7 @@
     }
     .gallery-ph .ph-em { font-size: 1.6rem; opacity: .4; }
     .gallery-ph span   { opacity: .5; line-height: 1.4; }
-    #gallery-inputs { display: none; }
-    .gallery-add-btn {
-      margin-top: 1.5rem; display: flex; align-items: center; gap: .5rem;
-      background: transparent; border: 1px solid var(--accent2);
-      color: var(--accent); padding: .55rem 1.2rem; border-radius: 6px;
-      font-size: .83rem; font-weight: 500; cursor: pointer; transition: background .2s;
-    }
-    .gallery-add-btn:hover { background: rgba(126,207,179,.08); }
+
 
     /* lightbox */
     .lightbox {
@@ -338,18 +328,19 @@
 <section id="hero">
   <div class="hero-inner">
     <!-- Profile photo LEFT -->
+    <!-- ✏️ TO UPDATE: upload your photo to the images/ folder as profile.jpg, it will appear here automatically -->
     <div class="hero-photo-wrap">
-      <div class="profile-photo-ring" onclick="document.getElementById('photo-input').click()" title="Click to upload your photo">
-        <img id="profile-img" alt="Jyotipriya Sarkar"/>
-        <div class="photo-placeholder" id="photo-ph">
+      <div class="profile-photo-ring">
+        <img src="images/profile.jpg" alt="Jyotipriya Sarkar"
+          onerror="this.style.display='none'; document.getElementById('photo-ph').style.display='flex'"/>
+        <div class="photo-placeholder" id="photo-ph" style="display:none">
           <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
             <circle cx="24" cy="18" r="9" stroke="#7ecfb3" stroke-width="1.5"/>
             <path d="M6 42c0-9.941 8.059-18 18-18s18 8.059 18 18" stroke="#7ecfb3" stroke-width="1.5" stroke-linecap="round"/>
           </svg>
-          <span>Click to upload<br/>your profile photo</span>
+          <span>Add images/profile.jpg<br/>to your repo</span>
         </div>
       </div>
-      <input type="file" id="photo-input" accept="image/*"/>
     </div>
 
     <!-- Text RIGHT -->
@@ -493,61 +484,58 @@
   <div class="section-inner">
     <p class="section-label">Gallery</p>
     <h2 class="section-heading reveal">Lab life &amp; visuals</h2>
+    <!-- ✏️ TO UPDATE GALLERY: upload images to your images/ folder named gallery-1.jpg through gallery-6.jpg -->
+    <!-- Each image shows automatically. If a file is missing, a placeholder appears instead. -->
     <div class="gallery-grid" id="gallery-grid">
       <!-- slot 1: wide -->
-      <div class="gallery-item wide reveal" data-slot="0" onclick="openLightbox(0)">
-        <img id="gimg-0" alt=""/>
-        <div class="gallery-ph" id="gph-0">
-          <span class="ph-em">🖼️</span>
-          <span>Lab / microscopy<br/>image</span>
+      <div class="gallery-item wide reveal" onclick="openLightbox('images/gallery-1.jpg')">
+        <img src="images/gallery-1.jpg" alt="Lab image 1"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"/>
+        <div class="gallery-ph" style="display:none">
+          <span class="ph-em">🖼️</span><span>Upload images/gallery-1.jpg</span>
         </div>
       </div>
       <!-- slot 2 -->
-      <div class="gallery-item reveal" data-slot="1" onclick="openLightbox(1)">
-        <img id="gimg-1" alt=""/>
-        <div class="gallery-ph" id="gph-1">
-          <span class="ph-em">🔬</span>
-          <span>Microscopy<br/>data</span>
+      <div class="gallery-item reveal" onclick="openLightbox('images/gallery-2.jpg')">
+        <img src="images/gallery-2.jpg" alt="Lab image 2"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"/>
+        <div class="gallery-ph" style="display:none">
+          <span class="ph-em">🔬</span><span>Upload images/gallery-2.jpg</span>
         </div>
       </div>
       <!-- slot 3 -->
-      <div class="gallery-item reveal" data-slot="2" onclick="openLightbox(2)">
-        <img id="gimg-2" alt=""/>
-        <div class="gallery-ph" id="gph-2">
-          <span class="ph-em">🧫</span>
-          <span>Experiment<br/>snapshot</span>
+      <div class="gallery-item reveal" onclick="openLightbox('images/gallery-3.jpg')">
+        <img src="images/gallery-3.jpg" alt="Lab image 3"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"/>
+        <div class="gallery-ph" style="display:none">
+          <span class="ph-em">🧫</span><span>Upload images/gallery-3.jpg</span>
         </div>
       </div>
       <!-- slot 4 -->
-      <div class="gallery-item reveal" data-slot="3" onclick="openLightbox(3)">
-        <img id="gimg-3" alt=""/>
-        <div class="gallery-ph" id="gph-3">
-          <span class="ph-em">📊</span>
-          <span>Gel / blot<br/>result</span>
+      <div class="gallery-item reveal" onclick="openLightbox('images/gallery-4.jpg')">
+        <img src="images/gallery-4.jpg" alt="Lab image 4"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"/>
+        <div class="gallery-ph" style="display:none">
+          <span class="ph-em">📊</span><span>Upload images/gallery-4.jpg</span>
         </div>
       </div>
       <!-- slot 5 -->
-      <div class="gallery-item reveal" data-slot="4" onclick="openLightbox(4)">
-        <img id="gimg-4" alt=""/>
-        <div class="gallery-ph" id="gph-4">
-          <span class="ph-em">🏛️</span>
-          <span>Conference /<br/>poster</span>
+      <div class="gallery-item reveal" onclick="openLightbox('images/gallery-5.jpg')">
+        <img src="images/gallery-5.jpg" alt="Lab image 5"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"/>
+        <div class="gallery-ph" style="display:none">
+          <span class="ph-em">🏛️</span><span>Upload images/gallery-5.jpg</span>
         </div>
       </div>
       <!-- slot 6 -->
-      <div class="gallery-item reveal" data-slot="5" onclick="openLightbox(5)">
-        <img id="gimg-5" alt=""/>
-        <div class="gallery-ph" id="gph-5">
-          <span class="ph-em">👩‍🔬</span>
-          <span>Lab<br/>moments</span>
+      <div class="gallery-item reveal" onclick="openLightbox('images/gallery-6.jpg')">
+        <img src="images/gallery-6.jpg" alt="Lab image 6"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"/>
+        <div class="gallery-ph" style="display:none">
+          <span class="ph-em">👩‍🔬</span><span>Upload images/gallery-6.jpg</span>
         </div>
       </div>
     </div>
-
-    <button class="gallery-add-btn reveal" onclick="document.getElementById('gallery-upload').click()">
-      ＋ Upload photos to gallery
-    </button>
-    <input type="file" id="gallery-upload" accept="image/*" multiple style="display:none"/>
   </div>
 </section>
 
@@ -697,45 +685,11 @@
      JAVASCRIPT
 ═══════════════════════════════════════════════ -->
 <script>
-/* ── 1. PROFILE PHOTO UPLOAD ── */
-document.getElementById('photo-input').addEventListener('change', function(e) {
-  const file = e.target.files[0];
-  if (!file) return;
-  const reader = new FileReader();
-  reader.onload = function(ev) {
-    const img = document.getElementById('profile-img');
-    img.src = ev.target.result;
-    img.style.display = 'block';
-    document.getElementById('photo-ph').style.display = 'none';
-  };
-  reader.readAsDataURL(file);
-});
-
-/* ── 2. GALLERY UPLOAD & LIGHTBOX ── */
-const gallerySlots = 6;
-const galleryImages = new Array(gallerySlots).fill(null);
-
-document.getElementById('gallery-upload').addEventListener('change', function(e) {
-  const files = Array.from(e.target.files);
-  files.forEach((file, i) => {
-    const slot = galleryImages.indexOf(null);
-    if (slot === -1) return;
-    const reader = new FileReader();
-    reader.onload = function(ev) {
-      galleryImages[slot] = ev.target.result;
-      const img = document.getElementById('gimg-' + slot);
-      img.src = ev.target.result;
-      img.style.display = 'block';
-      document.getElementById('gph-' + slot).style.display = 'none';
-    };
-    reader.readAsDataURL(file);
-  });
-});
-
-function openLightbox(slot) {
-  const src = galleryImages[slot];
-  if (!src) return;
-  document.getElementById('lightbox-img').src = src;
+/* ── LIGHTBOX ── */
+function openLightbox(src) {
+  const img = document.getElementById('lightbox-img');
+  if (!src || img.naturalWidth === 0 && src.includes('gallery')) return;
+  img.src = src;
   document.getElementById('lightbox').classList.add('open');
 }
 function closeLightbox() {
@@ -743,6 +697,12 @@ function closeLightbox() {
 }
 document.getElementById('lightbox').addEventListener('click', function(e) {
   if (e.target === this) closeLightbox();
+});
+// Only open lightbox if the image actually loaded
+document.querySelectorAll('.gallery-item img').forEach(img => {
+  img.addEventListener('click', function(e) {
+    if (this.complete && this.naturalWidth > 0) openLightbox(this.src);
+  });
 });
 
 /* ── 3. SCROLL REVEAL ── */
