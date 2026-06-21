@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Jyotipriya Sarkar | Amyloid & Phase Separation Researcher</title>
+
+  <!-- ★ SEO / Google discoverability ★ -->
+  <meta name="description" content="Jyotipriya Sarkar – Senior Project Assistant at IIT Jodhpur researching amyloid biology, liquid-liquid phase separation, and neurodegenerative disorders."/>
+  <meta name="keywords" content="Jyotipriya Sarkar, IIT Jodhpur, amyloid biology, phase separation, neurodegeneration, functional amyloid, protein aggregation, biosciences"/>
+  <meta name="author" content="Jyotipriya Sarkar"/>
+  <meta property="og:title" content="Jyotipriya Sarkar | Researcher"/>
+  <meta property="og:description" content="Studying how proteins misbehave — from liquid droplets to toxic aggregates — at IIT Jodhpur."/>
+  <meta property="og:type" content="website"/>
+  <link rel="canonical" href="https://jyotipriyasarkar07.github.io/"/>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet"/>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:      #0d0f14;
+      --bg2:     #13161e;
+      --bg3:     #1a1e29;
+      --card:    #161a24;
+      --border:  rgba(255,255,255,0.07);
+      --accent:  #7ecfb3;
+      --accent2: #4e9d85;
+      --text:    #e8eaf0;
+      --muted:   #7a8098;
+      --muted2:  #9ba3bf;
+      --hf:      'Playfair Display', Georgia, serif;
+      --bf:      'Inter', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: var(--bf); font-size: 16px; line-height: 1.75; }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      background: rgba(13,15,20,0.9); backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 60px;
+    }
+    .nav-logo { font-family: var(--hf); font-size: 1.05rem; color: var(--accent); text-decoration: none; }
+    .nav-links { display: flex; gap: 1.6rem; list-style: none; flex-wrap: wrap; }
+    .nav-links a { color: var(--muted2); text-decoration: none; font-size: 0.8rem; font-weight: 500;
+      letter-spacing: 0.05em; text-transform: uppercase; transition: color .2s; }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* ─── ANIMATION BANNER ─── */
+    #anim-banner {
+      position: relative; width: 100%; height: 220px; overflow: hidden;
+      background: linear-gradient(180deg, #07090f 0%, #0d0f14 100%);
+      border-bottom: 1px solid var(--border);
+    }
+    #anim-banner canvas { display: block; width: 100%; height: 100%; }
+    .banner-label {
+      position: absolute; bottom: 18px; left: 50%; transform: translateX(-50%);
+      font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: rgba(126,207,179,0.5); pointer-events: none; white-space: nowrap;
+    }
+
+    /* ─── HERO ─── */
+    #hero {
+      min-height: 100vh; display: flex; align-items: center;
+      padding: 80px 2rem 60px; position: relative; overflow: hidden;
+    }
+    #hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 60% 40%, rgba(126,207,179,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-inner { max-width: 960px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+
+    /* ── profile photo ── */
+    .hero-photo-wrap { display: flex; justify-content: center; align-items: center; }
+    .profile-photo-ring {
+      width: 220px; height: 220px; border-radius: 50%;
+      border: 2px solid rgba(126,207,179,0.35);
+      box-shadow: 0 0 40px rgba(126,207,179,0.1);
+      overflow: hidden; cursor: pointer; position: relative;
+      background: var(--bg3); display: flex; align-items: center; justify-content: center;
+      transition: border-color .3s;
+    }
+    .profile-photo-ring:hover { border-color: var(--accent); }
+    .profile-photo-ring img { width: 100%; height: 100%; object-fit: cover; display: none; }
+    .photo-placeholder {
+      display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+      color: var(--muted); font-size: 0.78rem; text-align: center; padding: 1rem;
+    }
+    .photo-placeholder svg { opacity: 0.4; }
+    .photo-placeholder span { letter-spacing: 0.05em; line-height: 1.4; }
+    #photo-input { display: none; }
+
+    .hero-text { }
+    .hero-eyebrow { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; }
+    .hero-name { font-family: var(--hf); font-size: clamp(2.2rem, 5vw, 3.2rem);
+      font-weight: 600; line-height: 1.15; color: #fff; margin-bottom: .75rem; }
+    .hero-name em { font-style: italic; color: var(--accent); }
+    .hero-title { font-size: 1rem; color: var(--muted2); margin-bottom: .3rem; }
+    .hero-inst  { font-size: 0.88rem; color: var(--muted); margin-bottom: 1.75rem; }
+    .hero-tagline { font-size: .92rem; color: var(--muted2); max-width: 380px;
+      line-height: 1.85; border-left: 2px solid var(--accent2); padding-left: 1rem; margin-bottom: 1.75rem; }
+    .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn { display: inline-block; padding: .55rem 1.3rem; border-radius: 6px;
+      font-size: .85rem; font-weight: 500; text-decoration: none; transition: all .2s; cursor: pointer; border: none; }
+    .btn-primary { background: var(--accent); color: #0d1a16; }
+    .btn-primary:hover { background: #9adcc8; }
+    .btn-outline { background: transparent; color: var(--accent); border: 1px solid var(--accent2); }
+    .btn-outline:hover { background: rgba(126,207,179,.08); }
+
+    /* ─── SECTIONS ─── */
+    section { padding: 88px 2rem; }
+    .section-inner { max-width: 880px; margin: 0 auto; }
+    .section-label { font-size: .72rem; font-weight: 600; letter-spacing: .15em;
+      text-transform: uppercase; color: var(--accent); margin-bottom: .4rem; }
+    .section-heading { font-family: var(--hf); font-size: clamp(1.55rem, 3.5vw, 2.1rem);
+      font-weight: 600; color: #fff; margin-bottom: 2.5rem; line-height: 1.25; }
+    .divider { height: 1px; background: var(--border); }
+
+    /* ─── ABOUT ─── */
+    #about { background: var(--bg); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+    .about-bio { color: var(--muted2); line-height: 1.88; }
+    .about-bio p + p { margin-top: 1rem; }
+    .tag-list { display: flex; flex-wrap: wrap; gap: .45rem; margin-top: .5rem; }
+    .tag { background: rgba(126,207,179,.09); color: var(--accent);
+      border: 1px solid rgba(126,207,179,.2); padding: .28rem .7rem;
+      border-radius: 100px; font-size: .78rem; font-weight: 500; }
+    .sidebar-block { margin-bottom: 1.75rem; }
+    .sidebar-block h4 { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: .6rem; }
+    .info-row { display: flex; align-items: flex-start; gap: .7rem;
+      font-size: .88rem; color: var(--muted2); padding: .35rem 0; }
+    .info-row .icon { color: var(--accent); flex-shrink: 0; margin-top: 3px; }
+
+    /* ─── RESEARCH INTERESTS ─── */
+    #interests { background: var(--bg2); }
+    .interests-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.25rem; }
+    .interest-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+      padding: 1.5rem; transition: border-color .25s, transform .2s;
+    }
+    .interest-card:hover { border-color: rgba(126,207,179,.3); transform: translateY(-3px); }
+    .ic-icon { width: 38px; height: 38px; background: rgba(126,207,179,.1); border-radius: 9px;
+      display: flex; align-items: center; justify-content: center; font-size: 1.2rem; margin-bottom: .9rem; }
+    .interest-card h3 { font-size: .95rem; font-weight: 600; color: #fff; margin-bottom: .4rem; }
+    .interest-card p  { font-size: .83rem; color: var(--muted2); line-height: 1.7; }
+
+    /* ─── RESEARCH PROJECTS ─── */
+    #projects { background: var(--bg); }
+    .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; }
+    .project-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+      padding: 1.75rem; display: flex; flex-direction: column; gap: .75rem;
+      transition: border-color .25s;
+    }
+    .project-card.placeholder {
+      border-style: dashed; border-color: rgba(126,207,179,.2);
+      align-items: center; text-align: center; padding: 2.5rem 1.5rem;
+    }
+    .project-card.placeholder .ph-icon { font-size: 2rem; margin-bottom: .5rem; opacity: .5; }
+    .project-card.placeholder h3 { color: var(--muted); font-size: .92rem; }
+    .project-card.placeholder p  { color: var(--muted); font-size: .8rem; line-height: 1.6; }
+    .project-status {
+      display: inline-block; font-size: .68rem; font-weight: 600; letter-spacing: .08em;
+      text-transform: uppercase; padding: .2rem .6rem; border-radius: 100px;
+    }
+    .status-active { background: rgba(126,207,179,.15); color: var(--accent); }
+    .status-planned { background: rgba(180,160,80,.12); color: #c8b44a; }
+    .project-card h3 { font-size: .98rem; font-weight: 600; color: #fff; }
+    .project-card p  { font-size: .85rem; color: var(--muted2); line-height: 1.7; flex: 1; }
+    .project-tags { display: flex; flex-wrap: wrap; gap: .4rem; }
+    .project-tag { font-size: .72rem; color: var(--muted); border: 1px solid var(--border);
+      padding: .15rem .55rem; border-radius: 100px; }
+
+    /* ─── PUBLICATIONS ─── */
+    #publications { background: var(--bg2); }
+    .pub-empty { background: var(--bg3); border: 1px dashed rgba(126,207,179,.22);
+      border-radius: 12px; padding: 3rem 2rem; text-align: center; }
+    .pub-empty .big-icon { font-size: 2.3rem; margin-bottom: .8rem; }
+    .pub-empty h3 { color: #fff; margin-bottom: .4rem; }
+    .pub-empty p { color: var(--muted); font-size: .88rem; max-width: 400px; margin: 0 auto; }
+
+    /* ─── GALLERY ─── */
+    #gallery { background: var(--bg); }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: auto auto;
+      gap: 1rem;
+    }
+    .gallery-item {
+      border-radius: 10px; overflow: hidden; position: relative;
+      background: var(--bg3); border: 1px dashed rgba(126,207,179,.2);
+      cursor: pointer; transition: border-color .25s, transform .2s;
+      aspect-ratio: 1;
+    }
+    .gallery-item:hover { border-color: var(--accent); transform: scale(1.02); }
+    .gallery-item.wide  { grid-column: span 2; aspect-ratio: 2/1; }
+    .gallery-item.tall  { grid-row:    span 2; aspect-ratio: 1/2; }
+    .gallery-item img   { width: 100%; height: 100%; object-fit: cover; display: none; }
+    .gallery-ph {
+      position: absolute; inset: 0; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: .5rem;
+      color: var(--muted); font-size: .75rem; text-align: center; padding: .75rem;
+    }
+    .gallery-ph .ph-em { font-size: 1.6rem; opacity: .4; }
+    .gallery-ph span   { opacity: .5; line-height: 1.4; }
+    #gallery-inputs { display: none; }
+    .gallery-add-btn {
+      margin-top: 1.5rem; display: flex; align-items: center; gap: .5rem;
+      background: transparent; border: 1px solid var(--accent2);
+      color: var(--accent); padding: .55rem 1.2rem; border-radius: 6px;
+      font-size: .83rem; font-weight: 500; cursor: pointer; transition: background .2s;
+    }
+    .gallery-add-btn:hover { background: rgba(126,207,179,.08); }
+
+    /* lightbox */
+    .lightbox {
+      display: none; position: fixed; inset: 0; z-index: 999;
+      background: rgba(0,0,0,.92); align-items: center; justify-content: center;
+    }
+    .lightbox.open { display: flex; }
+    .lightbox img { max-width: 90vw; max-height: 88vh; border-radius: 8px; }
+    .lightbox-close {
+      position: absolute; top: 20px; right: 28px; font-size: 2rem;
+      color: #fff; cursor: pointer; background: none; border: none; opacity: .7;
+    }
+    .lightbox-close:hover { opacity: 1; }
+
+    /* ─── CV ─── */
+    #cv { background: var(--bg2); }
+    .cv-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
+    .cv-col-label { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 1.5rem; }
+    .timeline { position: relative; padding-left: 1.5rem; }
+    .timeline::before { content: ''; position: absolute; left: 0; top: 6px; bottom: 0;
+      width: 1px; background: var(--border); }
+    .tl-item { position: relative; margin-bottom: 2.25rem; }
+    .tl-dot { position: absolute; left: -1.5rem; top: 6px; width: 8px; height: 8px;
+      background: var(--accent); border-radius: 50%; transform: translateX(-3.5px); }
+    .tl-period { font-size: .72rem; font-weight: 600; letter-spacing: .08em;
+      color: var(--accent); text-transform: uppercase; margin-bottom: .2rem; }
+    .tl-title { font-weight: 600; color: #fff; font-size: .98rem; }
+    .tl-place { color: var(--muted2); font-size: .85rem; margin-bottom: .35rem; }
+    .tl-desc  { color: var(--muted); font-size: .85rem; line-height: 1.7; }
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(175px,1fr)); gap: 1rem; margin-top: 2rem; }
+    .skill-block { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 1.2rem; }
+    .skill-block h4 { font-size: .72rem; color: var(--accent); text-transform: uppercase;
+      letter-spacing: .08em; margin-bottom: .6rem; }
+    .skill-block ul { list-style: none; }
+    .skill-block li { font-size: .85rem; color: var(--muted2); padding: .18rem 0; }
+    .skill-block li::before { content: '– '; color: var(--accent2); }
+
+    /* ─── BLOG ─── */
+    #blog { background: var(--bg); }
+    .blog-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(255px,1fr)); gap: 1.5rem; }
+    .blog-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+      padding: 1.5rem; transition: border-color .25s; }
+    .blog-card:hover { border-color: rgba(126,207,179,.3); }
+    .blog-tag { display: inline-block; font-size: .68rem; font-weight: 600; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--accent); border: 1px solid rgba(126,207,179,.25);
+      padding: .18rem .55rem; border-radius: 100px; margin-bottom: .7rem; }
+    .blog-card h3 { font-size: .94rem; font-weight: 600; color: #fff; margin-bottom: .45rem; line-height: 1.45; }
+    .blog-card p  { font-size: .83rem; color: var(--muted); line-height: 1.7; }
+    .blog-meta    { font-size: .75rem; color: var(--muted); margin-top: .9rem; }
+
+    /* ─── CONTACT ─── */
+    #contact { background: var(--bg2); }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+    .contact-intro { color: var(--muted2); line-height: 1.85; margin-bottom: 1.75rem; }
+    .contact-links { display: flex; flex-direction: column; gap: 1rem; }
+    .contact-link { display: flex; align-items: center; gap: 1rem; color: var(--muted2);
+      text-decoration: none; font-size: .9rem; transition: color .2s; }
+    .contact-link:hover { color: var(--accent); }
+    .cl-icon { width: 40px; height: 40px; border-radius: 10px; background: rgba(126,207,179,.08);
+      border: 1px solid rgba(126,207,179,.15); display: flex; align-items: center;
+      justify-content: center; font-size: 1.05rem; flex-shrink: 0; transition: background .2s; }
+    .contact-link:hover .cl-icon { background: rgba(126,207,179,.15); }
+    .contact-form { display: flex; flex-direction: column; gap: .9rem; }
+    .contact-form input, .contact-form textarea {
+      background: var(--bg3); border: 1px solid var(--border); border-radius: 8px;
+      padding: .7rem 1rem; color: var(--text); font-family: var(--bf); font-size: .9rem;
+      outline: none; resize: none; transition: border-color .2s;
+    }
+    .contact-form input:focus, .contact-form textarea:focus { border-color: var(--accent2); }
+    .contact-form input::placeholder, .contact-form textarea::placeholder { color: var(--muted); }
+
+    /* ─── FOOTER ─── */
+    footer { background: var(--bg); border-top: 1px solid var(--border);
+      padding: 2.25rem 2rem; text-align: center; font-size: .78rem; color: var(--muted); }
+    footer a { color: var(--accent); text-decoration: none; }
+
+    /* ─── SCROLL REVEAL ─── */
+    .reveal { opacity: 0; transform: translateY(22px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 700px) {
+      .hero-inner, .about-grid, .contact-grid, .cv-grid { grid-template-columns: 1fr; }
+      .gallery-grid { grid-template-columns: repeat(2,1fr); }
+      .gallery-item.wide, .gallery-item.tall { grid-column: span 1; grid-row: span 1; aspect-ratio: 1; }
+      nav { padding: 0 1rem; }
+      .nav-links { gap: .9rem; }
+      .nav-links a { font-size: .72rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══ NAV ═══ -->
+<nav>
+  <a class="nav-logo" href="#hero">Jyotipriya Sarkar</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#interests">Interests</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#publications">Papers</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#cv">CV</a></li>
+    <li><a href="#blog">Blog</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- ═══ ANIMATION BANNER ═══ -->
+<div id="anim-banner" style="margin-top:60px;">
+  <canvas id="banner-canvas"></canvas>
+  <p class="banner-label">Protein · Phase Separation · Amyloid · Neurodegeneration</p>
+</div>
+
+<!-- ═══ HERO ═══ -->
+<section id="hero">
+  <div class="hero-inner">
+    <!-- Profile photo LEFT -->
+    <div class="hero-photo-wrap">
+      <div class="profile-photo-ring" onclick="document.getElementById('photo-input').click()" title="Click to upload your photo">
+        <img id="profile-img" alt="Jyotipriya Sarkar"/>
+        <div class="photo-placeholder" id="photo-ph">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+            <circle cx="24" cy="18" r="9" stroke="#7ecfb3" stroke-width="1.5"/>
+            <path d="M6 42c0-9.941 8.059-18 18-18s18 8.059 18 18" stroke="#7ecfb3" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+          <span>Click to upload<br/>your profile photo</span>
+        </div>
+      </div>
+      <input type="file" id="photo-input" accept="image/*"/>
+    </div>
+
+    <!-- Text RIGHT -->
+    <div class="hero-text reveal">
+      <p class="hero-eyebrow">Amyloid &amp; Phase Separation Biology</p>
+      <h1 class="hero-name">Jyotipriya<br><em>Sarkar</em></h1>
+      <p class="hero-title">Senior Project Assistant</p>
+      <p class="hero-inst">Functional Amyloid Biology Lab · IIT Jodhpur</p>
+      <p class="hero-tagline">
+        Investigating how proteins misbehave — from liquid droplets to toxic aggregates — to understand the molecular roots of neurodegeneration.
+      </p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="#projects">View Research</a>
+        <a class="btn btn-outline"  href="#contact">Get in Touch</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══ ABOUT ═══ -->
+<section id="about">
+  <div class="section-inner">
+    <p class="section-label">About Me</p>
+    <h2 class="section-heading reveal">Driven by curiosity,<br>guided by molecular biology</h2>
+    <div class="about-grid">
+      <div class="about-bio reveal">
+        <p>I am a researcher in the <strong>Functional Amyloid Biology Lab</strong> at the Department of Biosciences and Bioengineering, IIT Jodhpur. My work sits at the interface of protein biochemistry, cell biology, and neuroscience.</p>
+        <p>My primary focus is on <strong>amyloid and functional amyloid biology</strong> — studying how proteins adopt fibrillar architectures and how these structural transitions are linked to disease. I am particularly fascinated by the phenomenon of <strong>Liquid–Liquid Phase Separation (LLPS)</strong>, whereby proteins and nucleic acids condense into membraneless organelles.</p>
+        <p>When this process goes awry, it can seed toxic protein aggregates implicated in neurodegenerative disorders such as ALS, Parkinson's disease, and Alzheimer's disease. I believe decoding the molecular grammar of phase separation holds the key to understanding — and potentially reversing — some of the most devastating diseases of our time.</p>
+      </div>
+      <div class="about-sidebar reveal">
+        <div class="sidebar-block">
+          <h4>Affiliation</h4>
+          <div class="info-row"><span class="icon">🏛</span><span>IIT Jodhpur — Biosciences &amp; Bioengineering</span></div>
+          <div class="info-row"><span class="icon">🔬</span><span>Functional Amyloid Biology Lab</span></div>
+        </div>
+        <div class="sidebar-block">
+          <h4>Connect</h4>
+          <div class="info-row"><span class="icon">✉</span>
+            <a href="mailto:jyotipriyasarkar3@gmail.com" style="color:var(--accent);text-decoration:none;">jyotipriyasarkar3@gmail.com</a>
+          </div>
+          <div class="info-row"><span class="icon">🔗</span>
+            <a href="https://www.linkedin.com/in/jyotipriya-sarkar-a16aa2217/" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none;">LinkedIn Profile</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══ RESEARCH INTERESTS ═══ -->
+<section id="interests">
+  <div class="section-inner">
+    <p class="section-label">Research Interests</p>
+    <h2 class="section-heading reveal">What I am curious about</h2>
+    <div class="interests-grid">
+      <div class="interest-card reveal">
+        <div class="ic-icon">💧</div>
+        <h3>Phase Separation</h3>
+        <p>How intrinsically disordered proteins undergo LLPS to form biomolecular condensates, and how aberrant phase transitions drive pathological aggregation.</p>
+      </div>
+      <div class="interest-card reveal">
+        <div class="ic-icon">🧬</div>
+        <h3>Amyloid Biology</h3>
+        <p>Characterising fibrillar protein architectures — both functional amyloids that serve cellular roles and pathological ones linked to neurodegeneration.</p>
+      </div>
+      <div class="interest-card reveal">
+        <div class="ic-icon">🧠</div>
+        <h3>Neurodegenerative Disorders</h3>
+        <p>Linking protein aggregation and condensate dysregulation to the molecular progression of ALS, Parkinson's disease, and Alzheimer's disease.</p>
+      </div>
+      <div class="interest-card reveal">
+        <div class="ic-icon">🧩</div>
+        <h3>Gene Regulation</h3>
+        <p>How transcription factor condensates and RNA-binding proteins participate in gene regulatory networks, and how mutations disrupt these processes.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══ RESEARCH PROJECTS ═══ -->
+<section id="projects">
+  <div class="section-inner">
+    <p class="section-label">Research Projects</p>
+    <h2 class="section-heading reveal">Active &amp; upcoming work</h2>
+    <div class="projects-grid">
+      <!-- Active project example -->
+      <div class="project-card reveal">
+        <span class="project-status status-active">Active</span>
+        <h3>Phase Separation Dynamics of Amyloidogenic Proteins</h3>
+        <p>Investigating how proteins associated with neurodegeneration undergo liquid-to-solid transitions, using in vitro reconstitution and fluorescence microscopy.</p>
+        <div class="project-tags">
+          <span class="project-tag">LLPS</span>
+          <span class="project-tag">FRAP</span>
+          <span class="project-tag">Confocal Microscopy</span>
+        </div>
+      </div>
+
+      <!-- Placeholder 1 -->
+      <div class="project-card placeholder reveal">
+        <div class="ph-icon">🔭</div>
+        <h3>Your next project goes here</h3>
+        <p>Edit this card in the HTML file to add your upcoming or planned research project details.</p>
+      </div>
+
+      <!-- Placeholder 2 -->
+      <div class="project-card placeholder reveal">
+        <div class="ph-icon">🧪</div>
+        <h3>Add another project</h3>
+        <p>Duplicate a project card in the HTML to showcase each research initiative separately.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══ PUBLICATIONS ═══ -->
+<section id="publications">
+  <div class="section-inner">
+    <p class="section-label">Publications</p>
+    <h2 class="section-heading reveal">Research output</h2>
+    <div class="pub-empty reveal">
+      <div class="big-icon">📄</div>
+      <h3>Publications coming soon</h3>
+      <p>Research work is currently in progress. Check back here for preprints, journal articles, and conference proceedings as they become available.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══ GALLERY ═══ -->
+<section id="gallery">
+  <div class="section-inner">
+    <p class="section-label">Gallery</p>
+    <h2 class="section-heading reveal">Lab life &amp; visuals</h2>
+    <div class="gallery-grid" id="gallery-grid">
+      <!-- slot 1: wide -->
+      <div class="gallery-item wide reveal" data-slot="0" onclick="openLightbox(0)">
+        <img id="gimg-0" alt=""/>
+        <div class="gallery-ph" id="gph-0">
+          <span class="ph-em">🖼️</span>
+          <span>Lab / microscopy<br/>image</span>
+        </div>
+      </div>
+      <!-- slot 2 -->
+      <div class="gallery-item reveal" data-slot="1" onclick="openLightbox(1)">
+        <img id="gimg-1" alt=""/>
+        <div class="gallery-ph" id="gph-1">
+          <span class="ph-em">🔬</span>
+          <span>Microscopy<br/>data</span>
+        </div>
+      </div>
+      <!-- slot 3 -->
+      <div class="gallery-item reveal" data-slot="2" onclick="openLightbox(2)">
+        <img id="gimg-2" alt=""/>
+        <div class="gallery-ph" id="gph-2">
+          <span class="ph-em">🧫</span>
+          <span>Experiment<br/>snapshot</span>
+        </div>
+      </div>
+      <!-- slot 4 -->
+      <div class="gallery-item reveal" data-slot="3" onclick="openLightbox(3)">
+        <img id="gimg-3" alt=""/>
+        <div class="gallery-ph" id="gph-3">
+          <span class="ph-em">📊</span>
+          <span>Gel / blot<br/>result</span>
+        </div>
+      </div>
+      <!-- slot 5 -->
+      <div class="gallery-item reveal" data-slot="4" onclick="openLightbox(4)">
+        <img id="gimg-4" alt=""/>
+        <div class="gallery-ph" id="gph-4">
+          <span class="ph-em">🏛️</span>
+          <span>Conference /<br/>poster</span>
+        </div>
+      </div>
+      <!-- slot 6 -->
+      <div class="gallery-item reveal" data-slot="5" onclick="openLightbox(5)">
+        <img id="gimg-5" alt=""/>
+        <div class="gallery-ph" id="gph-5">
+          <span class="ph-em">👩‍🔬</span>
+          <span>Lab<br/>moments</span>
+        </div>
+      </div>
+    </div>
+
+    <button class="gallery-add-btn reveal" onclick="document.getElementById('gallery-upload').click()">
+      ＋ Upload photos to gallery
+    </button>
+    <input type="file" id="gallery-upload" accept="image/*" multiple style="display:none"/>
+  </div>
+</section>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+  <img id="lightbox-img" src="" alt=""/>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══ CV ═══ -->
+<section id="cv">
+  <div class="section-inner">
+    <p class="section-label">Curriculum Vitae</p>
+    <h2 class="section-heading reveal">Experience &amp; education</h2>
+    <div class="cv-grid reveal">
+      <div>
+        <p class="cv-col-label">Experience</p>
+        <div class="timeline">
+          <div class="tl-item">
+            <div class="tl-dot"></div>
+            <p class="tl-period">2023 – Present</p>
+            <p class="tl-title">Senior Project Assistant</p>
+            <p class="tl-place">Functional Amyloid Biology Lab, IIT Jodhpur</p>
+            <p class="tl-desc">Research on protein phase separation and amyloid biology. Conducting experiments on liquid-liquid phase transitions and their role in neurodegenerative diseases.</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <p class="cv-col-label">Education</p>
+        <div class="timeline">
+          <div class="tl-item">
+            <div class="tl-dot"></div>
+            <p class="tl-period">Postgraduate</p>
+            <p class="tl-title">M.Sc. / Relevant Degree</p>
+            <p class="tl-place">Biotechnology / Life Sciences</p>
+            <p class="tl-desc">✏️ Update with your degree, university, and year.</p>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot"></div>
+            <p class="tl-period">Undergraduate</p>
+            <p class="tl-title">B.Sc. / Relevant Degree</p>
+            <p class="tl-place">Life Sciences / Biology</p>
+            <p class="tl-desc">✏️ Update with your degree, university, and year.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p style="font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:3rem;margin-bottom:1rem;">Technical Skills</p>
+    <div class="skills-grid reveal">
+      <div class="skill-block"><h4>Biochemistry</h4><ul>
+        <li>Protein purification</li><li>SDS-PAGE &amp; Western blot</li>
+        <li>Amyloid fibrillation assays</li><li>ThT fluorescence</li>
+      </ul></div>
+      <div class="skill-block"><h4>Cell Biology</h4><ul>
+        <li>Cell culture</li><li>Fluorescence microscopy</li>
+        <li>Condensate imaging</li><li>FRAP assays</li>
+      </ul></div>
+      <div class="skill-block"><h4>Mol. Biology</h4><ul>
+        <li>Cloning &amp; expression</li><li>PCR techniques</li>
+        <li>Gene regulation studies</li>
+      </ul></div>
+      <div class="skill-block"><h4>Analysis</h4><ul>
+        <li>ImageJ / FIJI</li><li>Literature review</li>
+        <li>Data interpretation</li>
+      </ul></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══ BLOG ═══ -->
+<section id="blog">
+  <div class="section-inner">
+    <p class="section-label">Blog / News</p>
+    <h2 class="section-heading reveal">Thoughts &amp; updates</h2>
+    <div class="blog-grid">
+      <div class="blog-card reveal">
+        <span class="blog-tag">Essay</span>
+        <h3>What is Phase Separation and why does it matter for neurodegeneration?</h3>
+        <p>A plain-language introduction to LLPS, biomolecular condensates, and their emerging role in diseases like ALS and FTD.</p>
+        <p class="blog-meta">Coming soon</p>
+      </div>
+      <div class="blog-card reveal">
+        <span class="blog-tag">Lab Notes</span>
+        <h3>The functional side of amyloid: when fibrils are a feature, not a bug</h3>
+        <p>Not all amyloids are harmful. This post explores naturally occurring amyloids in biology and what they reveal about protein structure-function.</p>
+        <p class="blog-meta">Coming soon</p>
+      </div>
+      <div class="blog-card reveal">
+        <span class="blog-tag">Research Update</span>
+        <h3>Life in the lab: a day in the Functional Amyloid Biology Lab at IIT Jodhpur</h3>
+        <p>A behind-the-scenes look at the daily rhythm of research — from gel runs to microscopy sessions.</p>
+        <p class="blog-meta">Coming soon</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══ CONTACT ═══ -->
+<section id="contact">
+  <div class="section-inner">
+    <p class="section-label">Contact</p>
+    <h2 class="section-heading reveal">Let's connect</h2>
+    <div class="contact-grid">
+      <div class="reveal">
+        <p class="contact-intro">I am always happy to discuss research, potential collaborations, or exchange ideas around protein biology and neurodegeneration.</p>
+        <div class="contact-links">
+          <a class="contact-link" href="mailto:jyotipriyasarkar3@gmail.com">
+            <div class="cl-icon">✉</div><span>jyotipriyasarkar3@gmail.com</span>
+          </a>
+          <a class="contact-link" href="https://www.linkedin.com/in/jyotipriya-sarkar-a16aa2217/" target="_blank" rel="noopener">
+            <div class="cl-icon" style="font-size:.75rem;font-weight:700;">in</div><span>LinkedIn — Jyotipriya Sarkar</span>
+          </a>
+          <a class="contact-link" href="#">
+            <div class="cl-icon">📍</div><span>IIT Jodhpur, Rajasthan, India</span>
+          </a>
+        </div>
+      </div>
+      <div class="reveal">
+        <p style="font-size:.72rem;color:var(--muted);margin-bottom:1rem;letter-spacing:.06em;text-transform:uppercase;">Send a message</p>
+        <div class="contact-form">
+          <input type="text"  placeholder="Your name"/>
+          <input type="email" placeholder="Your email"/>
+          <textarea rows="4" placeholder="Your message…"></textarea>
+          <button class="btn btn-primary" style="align-self:flex-start;"
+            onclick="alert('To make this form send real emails, connect it to Formspree (free). Ask me how!')">
+            Send Message
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <p>© 2025 Jyotipriya Sarkar · Built with HTML &amp; CSS · Hosted on <a href="https://pages.github.com" target="_blank">GitHub Pages</a></p>
+</footer>
+
+<!-- ════════════════════════════════════════════
+     JAVASCRIPT
+═══════════════════════════════════════════════ -->
+<script>
+/* ── 1. PROFILE PHOTO UPLOAD ── */
+document.getElementById('photo-input').addEventListener('change', function(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(ev) {
+    const img = document.getElementById('profile-img');
+    img.src = ev.target.result;
+    img.style.display = 'block';
+    document.getElementById('photo-ph').style.display = 'none';
+  };
+  reader.readAsDataURL(file);
+});
+
+/* ── 2. GALLERY UPLOAD & LIGHTBOX ── */
+const gallerySlots = 6;
+const galleryImages = new Array(gallerySlots).fill(null);
+
+document.getElementById('gallery-upload').addEventListener('change', function(e) {
+  const files = Array.from(e.target.files);
+  files.forEach((file, i) => {
+    const slot = galleryImages.indexOf(null);
+    if (slot === -1) return;
+    const reader = new FileReader();
+    reader.onload = function(ev) {
+      galleryImages[slot] = ev.target.result;
+      const img = document.getElementById('gimg-' + slot);
+      img.src = ev.target.result;
+      img.style.display = 'block';
+      document.getElementById('gph-' + slot).style.display = 'none';
+    };
+    reader.readAsDataURL(file);
+  });
+});
+
+function openLightbox(slot) {
+  const src = galleryImages[slot];
+  if (!src) return;
+  document.getElementById('lightbox-img').src = src;
+  document.getElementById('lightbox').classList.add('open');
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+}
+document.getElementById('lightbox').addEventListener('click', function(e) {
+  if (e.target === this) closeLightbox();
+});
+
+/* ── 3. SCROLL REVEAL ── */
+const reveals = document.querySelectorAll('.reveal');
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(en => { if (en.isIntersecting) { en.target.classList.add('visible'); } });
+}, { threshold: 0.12 });
+reveals.forEach(el => obs.observe(el));
+
+/* ── 4. ANIMATION BANNER ── */
+(function() {
+  const canvas = document.getElementById('banner-canvas');
+  const banner = document.getElementById('anim-banner');
+  const ctx    = canvas.getContext('2d');
+
+  function resize() {
+    canvas.width  = banner.offsetWidth;
+    canvas.height = banner.offsetHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  const W = () => canvas.width;
+  const H = () => canvas.height;
+  const ACC = '#7ecfb3';
+  const ACC2 = 'rgba(126,207,179,';
+
+  /* — Bacteria — */
+  const bacteria = Array.from({length: 9}, (_, i) => ({
+    x: Math.random() * 900,
+    y: Math.random() * 180,
+    vx: (Math.random() - .5) * .4,
+    vy: (Math.random() - .5) * .25,
+    rx: 18 + Math.random() * 10,
+    ry: 9  + Math.random() * 5,
+    angle: Math.random() * Math.PI,
+    spin:  (Math.random() - .5) * .008,
+    alpha: .35 + Math.random() * .25
+  }));
+
+  /* — Protein chain (random-walk nodes) — */
+  function makeChain(x0, y0, n, spread) {
+    const nodes = [{x: x0, y: y0}];
+    for (let i = 1; i < n; i++) {
+      nodes.push({
+        x: nodes[i-1].x + (Math.random()-.5)*spread,
+        y: nodes[i-1].y + (Math.random()-.5)*spread*.6
+      });
+    }
+    return nodes;
+  }
+
+  /* — Scientist at microscope (simple stick figure) — */
+  function drawScientist(x, y, t) {
+    ctx.save();
+    ctx.strokeStyle = ACC;
+    ctx.lineWidth = 2;
+    ctx.lineCap = 'round';
+
+    // body
+    ctx.beginPath(); ctx.arc(x, y - 38, 9, 0, Math.PI*2); ctx.stroke(); // head
+    ctx.beginPath(); ctx.moveTo(x, y-29); ctx.lineTo(x, y-10); ctx.stroke(); // torso
+
+    // arms — left arm reaches down to microscope eyepiece
+    const eyeY = y - 6 + Math.sin(t*.5)*2;
+    ctx.beginPath(); ctx.moveTo(x, y-24); ctx.lineTo(x-14, eyeY); ctx.stroke();
+    // right arm relaxed
+    ctx.beginPath(); ctx.moveTo(x, y-24); ctx.lineTo(x+12, y-14); ctx.stroke();
+
+    // legs
+    ctx.beginPath(); ctx.moveTo(x, y-10); ctx.lineTo(x-8, y+10); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(x, y-10); ctx.lineTo(x+8, y+10); ctx.stroke();
+
+    // microscope body
+    ctx.lineWidth = 2.5;
+    ctx.beginPath();
+    ctx.moveTo(x-14, eyeY);        // eyepiece
+    ctx.lineTo(x-18, eyeY+10);     // tube
+    ctx.lineTo(x-16, eyeY+22);     // nosepiece
+    ctx.lineTo(x-20, eyeY+32);     // objective
+    ctx.stroke();
+    // stage
+    ctx.beginPath(); ctx.moveTo(x-26, eyeY+28); ctx.lineTo(x-8, eyeY+28); ctx.stroke();
+    // base
+    ctx.beginPath(); ctx.moveTo(x-24, eyeY+40); ctx.lineTo(x-6, eyeY+40); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(x-20, eyeY+28); ctx.lineTo(x-20, eyeY+40); ctx.stroke();
+
+    // lens glow
+    ctx.beginPath();
+    ctx.arc(x-20, eyeY+30, 4, 0, Math.PI*2);
+    ctx.fillStyle = ACC2+'.6)';
+    ctx.fill();
+
+    ctx.restore();
+  }
+
+  /* — Beta-sheet fibril (amyloid) — */
+  function drawFibril(x, y, len, t) {
+    ctx.save();
+    ctx.strokeStyle = ACC;
+    ctx.lineWidth = 1.5;
+    // ladder rungs = beta strands
+    const strands = 8;
+    const spacing = len / strands;
+    for (let i = 0; i < strands; i++) {
+      const rx = x + i * spacing;
+      const wave = Math.sin(t*.6 + i * .8) * 3;
+      ctx.globalAlpha = .35 + .2 * Math.abs(Math.sin(t + i));
+      ctx.beginPath(); ctx.moveTo(rx, y - 8 + wave); ctx.lineTo(rx, y + 8 + wave); ctx.stroke();
+    }
+    // backbone lines
+    ctx.globalAlpha = .4;
+    ctx.beginPath();
+    let first = true;
+    for (let i = 0; i < strands; i++) {
+      const rx = x + i * spacing;
+      const wave = Math.sin(t*.6 + i*.8) * 3;
+      first ? ctx.moveTo(rx, y - 8 + wave) : ctx.lineTo(rx, y - 8 + wave);
+      first = false;
+    }
+    ctx.stroke();
+    first = true;
+    ctx.beginPath();
+    for (let i = 0; i < strands; i++) {
+      const rx = x + i * spacing;
+      const wave = Math.sin(t*.6 + i*.8) * 3;
+      first ? ctx.moveTo(rx, y + 8 + wave) : ctx.lineTo(rx, y + 8 + wave);
+      first = false;
+    }
+    ctx.stroke();
+    ctx.restore();
+  }
+
+  /* — Protein coil → fibril morph — */
+  let morphT = 0;
+
+  function drawProteinMorph(cx, cy, t) {
+    const phase = (Math.sin(t * .25) + 1) / 2; // 0 = coil, 1 = fibril
+    ctx.save();
+
+    // COIL (random-walk chain)
+    const coilNodes = makeChain(cx - 40, cy, 12, 14);
+    ctx.globalAlpha = (1 - phase) * .7;
+    ctx.strokeStyle = ACC;
+    ctx.lineWidth = 1.8;
+    ctx.beginPath();
+    coilNodes.forEach((n, i) => i === 0 ? ctx.moveTo(n.x, n.y) : ctx.lineTo(n.x, n.y));
+    ctx.stroke();
+    coilNodes.forEach(n => {
+      ctx.beginPath(); ctx.arc(n.x, n.y, 2.5, 0, Math.PI*2);
+      ctx.fillStyle = ACC; ctx.fill();
+    });
+
+    // FIBRIL
+    ctx.globalAlpha = phase * .75;
+    drawFibril(cx - 48, cy, 96, t);
+
+    // CONDENSATE DROPLET (appears at mid-phase)
+    const dropA = Math.sin(phase * Math.PI) * .5;
+    ctx.globalAlpha = dropA;
+    ctx.beginPath();
+    ctx.arc(cx, cy, 22 + Math.sin(t*.4)*3, 0, Math.PI*2);
+    ctx.strokeStyle = ACC2+'.6)';
+    ctx.lineWidth = 1.2;
+    ctx.setLineDash([4, 4]);
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    ctx.restore();
+  }
+
+  /* — Floating particles — */
+  const particles = Array.from({length: 30}, () => ({
+    x: Math.random() * 1200,
+    y: Math.random() * 200,
+    r: .5 + Math.random() * 2,
+    vx: (Math.random() - .5) * .3,
+    vy: (Math.random() - .5) * .2,
+    alpha: .1 + Math.random() * .3
+  }));
+
+  let t = 0;
+  function draw() {
+    const w = W(), h = H();
+    ctx.clearRect(0, 0, w, h);
+
+    // particles
+    particles.forEach(p => {
+      p.x = (p.x + p.vx + w) % w;
+      p.y = (p.y + p.vy + h) % h;
+      ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+      ctx.fillStyle = ACC2 + p.alpha + ')';
+      ctx.fill();
+    });
+
+    // bacteria
+    bacteria.forEach(b => {
+      b.x = (b.x + b.vx + w) % w;
+      b.y += b.vy;
+      if (b.y < -20 || b.y > h + 20) b.vy *= -1;
+      b.angle += b.spin;
+      ctx.save();
+      ctx.translate(b.x, b.y);
+      ctx.rotate(b.angle);
+      ctx.globalAlpha = b.alpha;
+      ctx.strokeStyle = ACC;
+      ctx.lineWidth = 1.2;
+      ctx.beginPath();
+      ctx.ellipse(0, 0, b.rx, b.ry, 0, 0, Math.PI*2);
+      ctx.stroke();
+      // flagella
+      ctx.beginPath();
+      ctx.moveTo(b.rx, 0);
+      for (let s = 0; s < 20; s++) {
+        ctx.lineTo(b.rx + s*2, Math.sin(s*.6 + t*.05)*6);
+      }
+      ctx.stroke();
+      ctx.restore();
+    });
+
+    // protein morphing — centred
+    drawProteinMorph(w * .5, h * .5, t);
+
+    // scientist — right side
+    drawScientist(w * .82, h * .72, t);
+
+    t += .018;
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+</script>
+
+</body>
+</html>
